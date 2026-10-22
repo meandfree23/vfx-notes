@@ -1,0 +1,335 @@
+{
+  "seedance_2_5": {
+    "id": "seedance_2_5",
+    "name": "Seedance 2.5",
+    "description": "Seedance 2.5 text-to-video, multimodal omni-reference generation, video edit, and video extension",
+    "parameters": [
+      {
+        "name": "mode",
+        "required": "optional",
+        "type": "string",
+        "description": "Generation mode: 't2v' for prompt-only generation, 'omni_reference' for image, video, or audio references, 'video_edit' to edit one reference video (billed by that video's duration; 'duration' and 'aspect_ratio' are ignored), or 'video_extension' to extend a reference video ('aspect_ratio' is ignored — the output follows the extended video).",
+        "options": [
+          "t2v",
+          "omni_reference",
+          "video_edit",
+          "video_extension"
+        ],
+        "default": "t2v"
+      },
+      {
+        "name": "duration",
+        "required": "optional",
+        "type": "number",
+        "description": "Duration in seconds (4-30). Whole number.",
+        "min": 4,
+        "max": 30,
+        "default": 5
+      },
+      {
+        "name": "resolution",
+        "required": "optional",
+        "type": "string",
+        "description": "Output resolution: 480p, 720p, or 1080p.",
+        "options": [
+          "480p",
+          "720p",
+          "1080p"
+        ],
+        "default": "720p"
+      },
+      {
+        "name": "generate_audio",
+        "required": "optional",
+        "type": "bool",
+        "description": "Generate audio for the output video.",
+        "default": true
+      },
+      {
+        "name": "bitrate_mode",
+        "required": "optional",
+        "type": "string",
+        "description": "'standard' = normal output bitrate; 'high' = higher bitrate output.",
+        "options": [
+          "standard",
+          "high"
+        ],
+        "default": "standard"
+      },
+      {
+        "name": "extension_mode",
+        "required": "optional",
+        "type": "string",
+        "description": "Extension direction; required for mode 'video_extension' and not allowed otherwise.",
+        "options": [
+          "backward",
+          "forward"
+        ],
+        "nullable": true
+      },
+      {
+        "name": "draft",
+        "required": "optional",
+        "type": "bool",
+        "description": "Generate a 480p draft that can be finalized within seven days.",
+        "default": false
+      },
+      {
+        "name": "draft_job_id",
+        "required": "optional",
+        "type": "string",
+        "description": "Completed draft job to finalize at 1080p.",
+        "nullable": true
+      }
+    ],
+    "medias": [
+      {
+        "name": "medias",
+        "type": "image",
+        "roles": [
+          "start_image",
+          "end_image",
+          "image_references",
+          "video_references",
+          "audio_references"
+        ]
+      }
+    ],
+    "aspect_ratios": [
+      "auto",
+      "21:9",
+      "16:9",
+      "4:3",
+      "1:1",
+      "3:4",
+      "9:16"
+    ]
+  },
+  "hf_mult_motion_control": {
+    "id": "hf_mult_motion_control",
+    "name": "Genjutsu",
+    "description": "Transfer motion from a reference video to subjects in reference images",
+    "parameters": [
+      {
+        "name": "resolution",
+        "required": "optional",
+        "type": "string",
+        "description": "Output resolution: 480p, 720p, or 1080p.",
+        "options": [
+          "480p",
+          "720p",
+          "1080p"
+        ],
+        "default": "720p"
+      }
+    ],
+    "medias": [
+      {
+        "name": "medias",
+        "type": "image",
+        "roles": [
+          "image_references",
+          "video_references"
+        ]
+      }
+    ],
+    "aspect_ratios": []
+  },
+  "kling_video_edit": {
+    "id": "kling_video_edit",
+    "name": "Kling 3.0 Omni Edit",
+    "description": "Edit a source video with text instructions and optional reference images",
+    "parameters": [
+      {
+        "name": "mode",
+        "required": "optional",
+        "type": "string",
+        "description": "Output quality: Standard, Pro, or 4K.",
+        "options": [
+          "std",
+          "pro",
+          "4k"
+        ],
+        "default": "pro"
+      }
+    ],
+    "medias": [
+      {
+        "name": "medias",
+        "type": "image",
+        "roles": [
+          "video_references",
+          "image_references"
+        ]
+      }
+    ],
+    "aspect_ratios": []
+  },
+  "cinematic_studio_video_4_0": {
+    "id": "cinematic_studio_video_4_0",
+    "name": "Cinema Studio 4.0",
+    "description": "Cinema-grade video generation with automatic prompt direction and camera, lighting, pacing, genre, era, and color controls",
+    "parameters": [
+      {
+        "name": "mode",
+        "required": "optional",
+        "type": "string",
+        "description": "Generation mode: 't2v' for prompt-only generation, 'omni_reference' for image, video, or audio references, 'video_edit' to edit one reference video (billed by that video's duration; 'duration' and 'aspect_ratio' are ignored), or 'video_extension' to extend a reference video ('aspect_ratio' is ignored — the output follows the extended video).",
+        "options": [
+          "t2v",
+          "omni_reference",
+          "video_edit",
+          "video_extension"
+        ],
+        "default": "t2v"
+      },
+      {
+        "name": "duration",
+        "required": "optional",
+        "type": "number",
+        "description": "Duration in seconds (4-30). Whole number.",
+        "min": 4,
+        "max": 30,
+        "default": 5
+      },
+      {
+        "name": "resolution",
+        "required": "optional",
+        "type": "string",
+        "description": "Output resolution: 480p, 720p, or 1080p.",
+        "options": [
+          "480p",
+          "720p",
+          "1080p"
+        ],
+        "default": "720p"
+      },
+      {
+        "name": "generate_audio",
+        "required": "optional",
+        "type": "bool",
+        "description": "Generate audio for the output video.",
+        "default": true
+      },
+      {
+        "name": "bitrate_mode",
+        "required": "optional",
+        "type": "string",
+        "description": "'standard' = normal output bitrate; 'high' = higher bitrate output.",
+        "options": [
+          "standard",
+          "high"
+        ],
+        "default": "standard"
+      },
+      {
+        "name": "extension_mode",
+        "required": "optional",
+        "type": "string",
+        "description": "Extension direction; required for mode 'video_extension' and not allowed otherwise.",
+        "options": [
+          "backward",
+          "forward"
+        ],
+        "nullable": true
+      },
+      {
+        "name": "era_id",
+        "required": "optional",
+        "type": "string",
+        "description": "Cinema Studio 4.0 creative-control id selecting the film era.",
+        "nullable": true
+      },
+      {
+        "name": "camera_model_id",
+        "required": "optional",
+        "type": "string",
+        "description": "Cinema Studio 4.0 creative-control id selecting the camera body.",
+        "nullable": true
+      },
+      {
+        "name": "camera_lens_id",
+        "required": "optional",
+        "type": "string",
+        "description": "Cinema Studio 4.0 creative-control id selecting the lens.",
+        "nullable": true
+      },
+      {
+        "name": "camera_aperture_id",
+        "required": "optional",
+        "type": "string",
+        "description": "Cinema Studio 4.0 creative-control id selecting the aperture.",
+        "nullable": true
+      },
+      {
+        "name": "pacing_id",
+        "required": "optional",
+        "type": "string",
+        "description": "Cinema Studio 4.0 creative-control id selecting montage pacing.",
+        "nullable": true
+      },
+      {
+        "name": "genre_id",
+        "required": "optional",
+        "type": "string",
+        "description": "Cinema Studio 4.0 creative-control id selecting the film genre.",
+        "nullable": true
+      },
+      {
+        "name": "light",
+        "required": "optional",
+        "type": "string",
+        "description": "Lighting source: 'preset' for a Cinema Studio scheme, 'user' for the caller's saved lighting preset, or 'custom' for a placed rig.",
+        "options": [
+          "preset",
+          "custom",
+          "user"
+        ],
+        "nullable": true
+      },
+      {
+        "name": "light_id",
+        "required": "optional",
+        "type": "string",
+        "description": "Lighting id. Use a Cinema Studio control id with light='preset', a saved lighting-preset id with light='user', or 'custom' for a placed rig.",
+        "nullable": true
+      },
+      {
+        "name": "light_custom",
+        "required": "optional",
+        "type": "object_array",
+        "description": "Ordered custom lighting rig. The first source is the key light. Each item is an object {direction: top|bottom|left|right|front|back|top-left|top-right|bottom-left|bottom-right|front-top|front-bottom|front-left|front-right|back-top|back-bottom|back-left|back-right|front-top-left|front-top-right|front-bottom-left|front-bottom-right|back-top-left|back-top-right|back-bottom-left|back-bottom-right (required), color: string, brightness: integer, diffuse: integer}.",
+        "nullable": true
+      },
+      {
+        "name": "color_palette",
+        "required": "optional",
+        "type": "string",
+        "description": "Color palette selection with type 'preset' or 'user' and its id.",
+        "nullable": true
+      }
+    ],
+    "medias": [
+      {
+        "name": "medias",
+        "type": "image",
+        "roles": [
+          "start_image",
+          "end_image",
+          "image_references",
+          "video_references",
+          "audio_references"
+        ]
+      }
+    ],
+    "aspect_ratios": [
+      "auto",
+      "21:9",
+      "16:9",
+      "4:3",
+      "1:1",
+      "3:4",
+      "9:16"
+    ]
+  }
+}
