@@ -76,7 +76,7 @@ function detail(id){
  const p=projectOf(r),siblings=CUTS.filter(x=>x.projectId===r.projectId),i=siblings.indexOf(r),prev=siblings[i-1],next=siblings[i+1];
  MAIN.innerHTML=`<div class="wrap"><div class="detail-breadcrumb"><a href="#archive">아카이브</a><span>/</span><a href="#project/${p.id}">${E(p.title)}</a><span>/</span><span>${r.id}</span></div>
  <div class="detail-heading"><div><p class="eyebrow red">${r.id} · ${category(r)} / ${E(p.english).toUpperCase()}</p><h1>${E(r.title)}</h1></div><span class="id-counter">${String(i+1).padStart(2,'0')} / ${siblings.length}</span></div>
- <div class="detail-media"><div class="video-box"><video id="clip-video" controls playsinline preload="metadata" poster="${thumb(r)}" src="${p.video}" aria-label="${E(r.title)} 원본 구간 영상"></video></div><aside class="media-aside"><p class="eyebrow">CLIP INFORMATION</p><div class="media-field"><small>원본 릴 재생 구간</small><span>${range(r)}</span></div><div class="media-field"><small>구간 길이</small><span>${(r.end-r.start).toFixed(2)}초</span></div><div class="media-field"><small>권장 구현 경로</small><span>${r.route} · ${ROUTES[r.route]}</span></div><div class="media-field"><small>AI 단독 외형 근사</small><span>${r.ai}</span></div><button class="play-segment" id="play-segment">▶ 이 클립 재생</button><p class="media-note">분석 릴의 720p 재생용 사본.<br>선택 구간 끝에서 자동으로 정지합니다.</p></aside></div>
+ <div class="detail-media"><div class="video-box"><video id="clip-video" controls playsinline preload="auto" poster="${thumb(r)}" data-src="assets/media/clips/${r.id}.mp4" aria-label="${E(r.title)} 원본 구간 영상"></video></div><aside class="media-aside"><p class="eyebrow">CLIP INFORMATION</p><div class="media-field"><small>원본 릴 재생 구간</small><span>${range(r)}</span></div><div class="media-field"><small>구간 길이</small><span>${(r.end-r.start).toFixed(2)}초</span></div><div class="media-field"><small>권장 구현 경로</small><span>${r.route} · ${ROUTES[r.route]}</span></div><div class="media-field"><small>AI 단독 외형 근사</small><span>${r.ai}</span></div><button class="play-segment" id="play-segment">▶ 이 클립 재생</button><p class="media-note">선택 구간만 담은 720p 재생 사본.<br>타임코드는 원본 릴 기준입니다.</p></aside></div>
  <div class="clip-nav"><button id="previous-clip" ${prev?'':'disabled'} aria-label="이전 클립">← ${prev?`${prev.id} 이전 클립`:'첫 번째 클립'}</button><span>${r.id} / ${clock(r.start)}—${clock(r.end)}</span><button id="next-clip" ${next?'':'disabled'} aria-label="다음 클립">${next?`${next.id} 다음 클립`:'마지막 클립'} →</button></div>
  <div class="notebook"><nav class="notebook-nav" aria-label="분석 섹션"><p class="eyebrow">IN THIS STUDY</p><a href="#composition" data-section="composition" class="active"><b>01</b>구도와 시선</a><a href="#vfx" data-section="vfx"><b>02</b>VFX와 합성</a><a href="#implementation" data-section="implementation"><b>03</b>AI 구현 설계</a><a href="#quality" data-section="quality"><b>04</b>한계와 검수</a><a href="#sources" data-section="sources"><b>05</b>자료와 근거</a></nav>
  <div class="notebook-body"><section id="composition" class="analysis-section">${sectionTitle('01','구도와 시선','Composition')}<p class="analysis-copy">${E(r.composition)}</p><div class="frames">${r.frames.map((t,j)=>`<button class="frame" data-seek="${t}" aria-label="${precise(t)} 프레임부터 보기"><img loading="lazy" src="${thumb(r,j)}" alt="${r.id} ${precise(t)} 원본 표본"><span class="frame-label"><span>FRAME 0${j+1}</span><span>${precise(t)} ↗</span></span></button>`).join('')}</div><p class="frames-note">구간 안의 앞 · 중간 · 뒤 시간 표본입니다. 같은 순간의 Before / After가 아니며, 원본 릴의 패스 비교나 와이프가 포함될 수 있습니다. 프레임을 누르면 해당 시점으로 이동합니다.</p></section>
@@ -89,28 +89,29 @@ function detail(id){
  setupVideo(r);setupSections();
 }
 function setupVideo(r){
- const v=document.querySelector('#clip-video'),button=document.querySelector('#play-segment');let disposed=false,request=0;
+ const v=document.querySelector('#clip-video'),button=document.querySelector('#play-segment');const start=0,end=r.end-r.start;let disposed=false,request=0,objectURL=null;const controller=new AbortController();
  const metadata=()=>v.readyState>=1?Promise.resolve():new Promise((resolve,reject)=>{v.addEventListener('loadedmetadata',resolve,{once:true});v.addEventListener('error',reject,{once:true});});
  async function seek(t){
   await metadata();if(disposed)return;
   if(Math.abs(v.currentTime-t)<.015&&!v.seeking)return;
   await new Promise((resolve,reject)=>{v.addEventListener('seeked',resolve,{once:true});v.addEventListener('error',reject,{once:true});v.currentTime=t;});
  }
- const initialPosition=seek(r.start);initialPosition.catch(()=>{});
+ const clipSource=v.dataset.src;
+ const initialPosition=fetch(clipSource,{signal:controller.signal}).then(response=>{if(!response.ok)throw Error('클립 불러오기 실패');return response.blob();}).then(blob=>{if(disposed)return;objectURL=URL.createObjectURL(blob);v.src=objectURL;return seek(start);});initialPosition.catch(()=>{});
  async function playFrom(t){
   const ticket=++request;button.disabled=true;button.textContent='영상 구간을 불러오는 중…';
   try{await initialPosition;await seek(t);if(disposed||ticket!==request)return;await v.play();}
   catch{if(!disposed)toast('영상을 불러오지 못했습니다. 재생 버튼을 다시 눌러 주세요.');}
   finally{if(!disposed&&ticket===request){button.disabled=false;button.textContent=v.paused?'▶ 이 클립 다시 보기':'Ⅱ 일시정지';}}
  }
- function settle(){if(v.currentTime>=r.end){v.pause();v.currentTime=Math.max(r.start,r.end-.065);}}
+ function settle(){if(v.currentTime>=end){v.pause();v.currentTime=Math.max(start,end-.065);}}
  v.addEventListener('timeupdate',settle);
- v.addEventListener('play',()=>{if(v.readyState<1||v.currentTime<r.start-.05||v.currentTime>=r.end-.07){v.pause();playFrom(r.start);return;}button.textContent='Ⅱ 일시정지';});
+ v.addEventListener('play',()=>{if(v.readyState<1||v.currentTime<start-.05||v.currentTime>=end-.07){v.pause();playFrom(start);return;}button.textContent='Ⅱ 일시정지';});
  v.addEventListener('pause',()=>{button.textContent='▶ 이 클립 다시 보기';});
  v.addEventListener('error',()=>{button.textContent='영상 다시 불러오기';toast('영상을 불러오지 못했습니다. 다시 재생해 주세요.');});
- button.onclick=()=>{if(!v.paused){v.pause();return;}const t=v.currentTime>=r.end-.1||v.currentTime<r.start?r.start:v.currentTime;playFrom(t);};
- MAIN.querySelectorAll('[data-seek]').forEach(b=>b.onclick=async()=>{++request;v.pause();button.disabled=true;try{await initialPosition;await seek(Math.min(+b.dataset.seek,r.end-.065));if(disposed)return;v.scrollIntoView({behavior:'smooth',block:'center'});button.textContent='▶ 이 프레임부터 재생';}catch{toast('프레임을 불러오지 못했습니다. 다시 눌러 주세요.');}finally{if(!disposed)button.disabled=false;}});
- videoCleanup=()=>{disposed=true;++request;v.pause();v.removeAttribute('src');v.load();};
+ button.onclick=()=>{if(!v.paused){v.pause();return;}const t=v.currentTime>=end-.1||v.currentTime<start?start:v.currentTime;playFrom(t);};
+ MAIN.querySelectorAll('[data-seek]').forEach(b=>b.onclick=async()=>{++request;v.pause();button.disabled=true;try{await initialPosition;await seek(Math.min(+b.dataset.seek-r.start,end-.065));if(disposed)return;v.scrollIntoView({behavior:'smooth',block:'center'});button.textContent='▶ 이 프레임부터 재생';}catch{toast('프레임을 불러오지 못했습니다. 다시 눌러 주세요.');}finally{if(!disposed)button.disabled=false;}});
+ videoCleanup=()=>{disposed=true;++request;controller.abort();v.pause();v.removeAttribute('src');v.load();if(objectURL)URL.revokeObjectURL(objectURL);};
 }
 function setupSections(){
  const links=[...MAIN.querySelectorAll('[data-section]')];
