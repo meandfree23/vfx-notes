@@ -1,0 +1,99 @@
+[
+  {
+    "id": "decision-to-leave",
+    "number": "001",
+    "title": "헤어질 결심",
+    "english": "Decision to Leave",
+    "year": "2022",
+    "format": "영화",
+    "director": "박찬욱",
+    "studio": "4th Creative Party",
+    "date": "2026.10.21",
+    "duration": 237.529,
+    "description": "시선, 반사, 그리고 공간을 잇는 보이지 않는 합성.",
+    "summary": "거울의 독립 초점, 절벽의 가상 카메라, 지도 전환, 해변의 물과 모래를 읽습니다.",
+    "tags": [
+      "반사·초점",
+      "공간 확장",
+      "물·모래",
+      "그래픽 전환"
+    ],
+    "cuts": "data/cuts.json",
+    "thumbBase": "assets/thumbs",
+    "video": "assets/media/decision-to-leave.mp4",
+    "hero": "S72",
+    "featured": [
+      "S39",
+      "S50",
+      "S29",
+      "S34",
+      "S67",
+      "S75"
+    ],
+    "analysis": "data/컷별_상세분석.md",
+    "csv": "data/컷목록.csv",
+    "sources": [
+      {
+        "title": "VFX 슈퍼바이저 이전형 인터뷰",
+        "note": "befores & afters · 거울·절벽·해변의 제작 맥락",
+        "url": "https://beforesandafters.com/2022/12/19/mirror-gags-mountain-extensions-and-that-beach-scene-the-vfx-of-decision-to-leave/"
+      }
+    ],
+    "provenance": "사용자가 제공한 4th Creative Party 제작 릴. 원본 2048×1152, 약 23.976fps. 촬영 플레이트와 EXR 패스를 보유한 분석은 아닙니다.",
+    "method": "전체 1초 표본과 전환·빠른 동작의 0.5초 표본 검토. 80개는 숏·전환 분석 구간이며 본편 편집 컷 수와 다릅니다."
+  },
+  {
+    "id": "mindhunter-s1",
+    "number": "002",
+    "title": "마인드헌터 · 시즌 1",
+    "english": "Mindhunter · Season 1",
+    "year": "2017",
+    "format": "시리즈",
+    "director": "데이비드 핀처 외",
+    "studio": "Artemple Hollywood",
+    "date": "2026.10.22",
+    "duration": 343.361,
+    "description": "보도와 간판, 나뭇잎 한 겹으로 시대를 되돌리는 기술.",
+    "summary": "계절과 거리의 복원, CG 텔레비전, 모텔 배경, 항공기를 실사와 정밀하게 잇는 과정을 읽습니다.",
+    "tags": [
+      "시대 복원",
+      "클린업",
+      "계절 변환",
+      "그린스크린",
+      "CG 소품"
+    ],
+    "cuts": "data/mindhunter-cuts.json",
+    "thumbBase": "assets/thumbs/mindhunter-s1",
+    "video": "assets/media/mindhunter-s1.mp4",
+    "hero": "M03",
+    "featured": [
+      "M03",
+      "M01",
+      "M10",
+      "M22",
+      "M40",
+      "M43"
+    ],
+    "analysis": "data/mindhunter-analysis.md",
+    "csv": "data/mindhunter-clips.csv",
+    "sources": [
+      {
+        "title": "Artemple Hollywood · 공식 YouTube 릴",
+        "note": "Mindhunter VFX Breakdown - Artemple · 2017 공개본 / 분석 타임코드 기준",
+        "url": "https://www.youtube.com/watch?v=Di4Byf1EzRE"
+      },
+      {
+        "title": "Artemple Hollywood · 공식 Vimeo 릴",
+        "note": "시즌 1 제작 릴 · 시즌 2 및 Territory Studio 릴과 구분",
+        "url": "https://vimeo.com/239193453"
+      },
+      {
+        "title": "Artemple Hollywood · 작품 목록",
+        "note": "시즌 1 제작 크레딧과 공식 브레이크다운 출처",
+        "url": "https://www.artemplehollywood.com/projects"
+      }
+    ],
+    "provenance": "제작사가 공개한 공식 YouTube 릴을 기준으로 분석했습니다. 소스 1280×720, 약 23.976fps. 핀처는 시즌 1 총괄 제작 및 4개 에피소드 연출로 공식 페이지에 표기되며, 개별 숏의 연출자는 별도 확정하지 않았습니다.",
+    "method": "전체 2초 표본을 검토하고 0.5초 표본으로 짧은 몽타주와 전환을 대조했습니다. 인트로·아웃트로를 제외한 43개 분석 구간이며, 같은 숏의 비교 와이프와 TV 제작 시연은 함께 묶었습니다. 모든 경계는 근사입니다."
+  }
+]

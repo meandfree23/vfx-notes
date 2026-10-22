@@ -1,6 +1,6 @@
 # 〈헤어질 결심〉 VFX Breakdown — AI·Higgsfield 구현 분석
 
-원본: `/Users/kk/Desktop/헤어질 결심_VFX Breakdown_4th Creative Party.mp4`  
+원본: 사용자가 제공한 〈헤어질 결심〉 VFX Breakdown · 4th Creative Party.  
 분석일: 2026-10-21 · 영상 길이 237.529초 · 2048×1152 · 24000/1001fps(약 23.976fps) · Rec.709 · 생성 실행/크레딧 사용 0
 
 첨부에 쓰인 Downloads 경로에는 파일이 없었고 같은 이름의 바탕화면 파일을 발견하여 분석했다. 원본을 수정하지 않았다. `source.mp4`는 그 원본을 가리키는 로컬 심볼릭 링크다. 원본 이동 시 원본 링크도 갱신해야 한다. HTML 플레이어에는 브라우저 호환성을 위해 같은 시간축의 720p H.264 재생용 사본 `preview_h264.mp4`를 만들었다. 분석 프레임과 타임코드의 기준은 원본이다.
