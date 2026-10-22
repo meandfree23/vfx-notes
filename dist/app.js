@@ -89,16 +89,28 @@ function detail(id){
  setupVideo(r);setupSections();
 }
 function setupVideo(r){
- const v=document.querySelector('#clip-video'),button=document.querySelector('#play-segment');let endLock=true,frameLoop=0;
- function settle(){if(endLock&&v.currentTime>=r.end){v.pause();v.currentTime=Math.max(r.start,r.end-.065);}}
- v.addEventListener('loadedmetadata',()=>{v.currentTime=r.start;},{once:true});
+ const v=document.querySelector('#clip-video'),button=document.querySelector('#play-segment');let disposed=false,request=0;
+ const metadata=()=>v.readyState>=1?Promise.resolve():new Promise((resolve,reject)=>{v.addEventListener('loadedmetadata',resolve,{once:true});v.addEventListener('error',reject,{once:true});});
+ async function seek(t){
+  await metadata();if(disposed)return;
+  if(Math.abs(v.currentTime-t)<.015&&!v.seeking)return;
+  await new Promise((resolve,reject)=>{v.addEventListener('seeked',resolve,{once:true});v.addEventListener('error',reject,{once:true});v.currentTime=t;});
+ }
+ const initialPosition=seek(r.start);initialPosition.catch(()=>{});
+ async function playFrom(t){
+  const ticket=++request;button.disabled=true;button.textContent='영상 구간을 불러오는 중…';
+  try{await initialPosition;await seek(t);if(disposed||ticket!==request)return;await v.play();}
+  catch{if(!disposed)toast('영상을 불러오지 못했습니다. 재생 버튼을 다시 눌러 주세요.');}
+  finally{if(!disposed&&ticket===request){button.disabled=false;button.textContent=v.paused?'▶ 이 클립 다시 보기':'Ⅱ 일시정지';}}
+ }
+ function settle(){if(v.currentTime>=r.end){v.pause();v.currentTime=Math.max(r.start,r.end-.065);}}
  v.addEventListener('timeupdate',settle);
- v.addEventListener('play',()=>{button.textContent='Ⅱ 일시정지';if(v.currentTime<r.start-.05||v.currentTime>=r.end-.07)v.currentTime=r.start;});
+ v.addEventListener('play',()=>{if(v.readyState<1||v.currentTime<r.start-.05||v.currentTime>=r.end-.07){v.pause();playFrom(r.start);return;}button.textContent='Ⅱ 일시정지';});
  v.addEventListener('pause',()=>{button.textContent='▶ 이 클립 다시 보기';});
  v.addEventListener('error',()=>{button.textContent='영상 다시 불러오기';toast('영상을 불러오지 못했습니다. 다시 재생해 주세요.');});
- button.onclick=()=>{if(!v.paused){v.pause();return;}endLock=true;if(v.error)v.load();if(v.currentTime>=r.end-.1||v.currentTime<r.start)v.currentTime=r.start;v.play().catch(()=>toast('영상의 재생 버튼을 한 번 더 눌러 주세요.'));};
- MAIN.querySelectorAll('[data-seek]').forEach(b=>b.onclick=()=>{endLock=true;v.currentTime=Math.min(+b.dataset.seek,r.end-.065);v.pause();v.scrollIntoView({behavior:'smooth',block:'center'});button.textContent='▶ 이 프레임부터 재생';});
- videoCleanup=()=>{v.pause();v.removeAttribute('src');v.load();if(frameLoop&&v.cancelVideoFrameCallback)v.cancelVideoFrameCallback(frameLoop);};
+ button.onclick=()=>{if(!v.paused){v.pause();return;}const t=v.currentTime>=r.end-.1||v.currentTime<r.start?r.start:v.currentTime;playFrom(t);};
+ MAIN.querySelectorAll('[data-seek]').forEach(b=>b.onclick=async()=>{++request;v.pause();button.disabled=true;try{await initialPosition;await seek(Math.min(+b.dataset.seek,r.end-.065));if(disposed)return;v.scrollIntoView({behavior:'smooth',block:'center'});button.textContent='▶ 이 프레임부터 재생';}catch{toast('프레임을 불러오지 못했습니다. 다시 눌러 주세요.');}finally{if(!disposed)button.disabled=false;}});
+ videoCleanup=()=>{disposed=true;++request;v.pause();v.removeAttribute('src');v.load();};
 }
 function setupSections(){
  const links=[...MAIN.querySelectorAll('[data-section]')];
