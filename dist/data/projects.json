@@ -95,5 +95,60 @@
     ],
     "provenance": "제작사가 공개한 공식 YouTube 릴을 기준으로 분석했습니다. 소스 1280×720, 약 23.976fps. 핀처는 시즌 1 총괄 제작 및 4개 에피소드 연출로 공식 페이지에 표기되며, 개별 숏의 연출자는 별도 확정하지 않았습니다.",
     "method": "전체 2초 표본을 검토하고 0.5초 표본으로 짧은 몽타주와 전환을 대조했습니다. 인트로·아웃트로를 제외한 43개 분석 구간이며, 같은 숏의 비교 와이프와 TV 제작 시연은 함께 묶었습니다. 모든 경계는 근사입니다."
+  },
+  {
+    "id": "gone-girl",
+    "number": "003",
+    "title": "나를 찾아줘",
+    "english": "Gone Girl",
+    "year": "2014",
+    "format": "영화",
+    "director": "데이비드 핀처",
+    "studio": "Artemple Hollywood",
+    "date": "2026.10.23",
+    "duration": 119.423333,
+    "aspectRatio": "4/3",
+    "description": "창 너머의 도시와 정원, 지붕 너머의 세계를 잇는 합성.",
+    "summary": "창밖 교체, 다중 창의 공간 연속성, 거리와 카지노의 확장을 아홉 개 숏으로 읽습니다.",
+    "tags": [
+      "창밖 교체",
+      "3D 매트페인팅",
+      "거리 확장",
+      "실내외 노출",
+      "다중 가림"
+    ],
+    "cuts": "data/gone-girl-cuts.json",
+    "thumbBase": "assets/thumbs/gone-girl",
+    "video": "assets/media/gone-girl.mp4",
+    "hero": "G04",
+    "featured": [
+      "G04",
+      "G01",
+      "G03",
+      "G07",
+      "G08",
+      "G09"
+    ],
+    "analysis": "data/gone-girl-analysis.md",
+    "csv": "data/gone-girl-clips.csv",
+    "sources": [
+      {
+        "title": "Artemple Hollywood · 공식 Vimeo 릴",
+        "note": "Gone Girl Reel · 이 공개본의 타임코드로 분석",
+        "url": "https://vimeo.com/115019179"
+      },
+      {
+        "title": "Artemple Hollywood · 작품 목록",
+        "note": "2014 · David Fincher · 공식 Vimeo 연결",
+        "url": "https://www.artemplehollywood.com/projects"
+      },
+      {
+        "title": "Artemple Hollywood · 제작사 소개",
+        "note": "작품 크레딧 및 환경 VFX 전문 분야의 맥락",
+        "url": "https://www.artemplehollywood.com/about"
+      }
+    ],
+    "provenance": "제작사 공식 작품 페이지가 연결한 Vimeo Gone Girl Reel을 기준으로 분석했습니다. 소스 960×720, 24fps, 약 1분 59초. 4:3 컨테이너 안의 레터박스와 하단 제작 라벨을 그대로 보존했습니다. 촬영 플레이트·EXR·카메라 트래킹 원본을 보유한 분석은 아닙니다.",
+    "method": "전체 1초 표본과 장면 경계·비교 패스의 0.5초 표본을 검토했습니다. 장면 변화 후보를 화면과 대조하고 인트로·엔드카드를 제외한 9개 연속 숏으로 분류했습니다. 비교 와이프·정지·반복은 같은 기록에 포함하며 현관 진입 후의 연속 팬도 한 숏입니다. 모든 경계는 공개 릴 기준의 근사입니다."
   }
 ]

@@ -9,10 +9,16 @@
 - 분석 방법: 관찰·제작 확인·추정의 구분과 범위.
 - 기록에 관하여: 자료 출처, 원문 Markdown/CSV/모델 사양 다운로드.
 
-`dist/`는 빌드 없는 HTML/CSS/JS다. 헤어질 결심(80개)과 마인드헌터 시즌 1(43개)을 기록했다. 각 작품의 출처와 분석일은 `dist/data/projects.json`에서 관리한다. 새 영상 등록 규칙은 `CONTENT_GUIDE.md`에 있다.
+`dist/`는 빌드 없는 HTML/CSS/JS다. 헤어질 결심(80개), 마인드헌터 시즌 1(43개), 나를 찾아줘(9개)를 기록했다. 각 작품의 출처와 분석일은 `dist/data/projects.json`에서 관리한다. 새 영상 등록 규칙은 `CONTENT_GUIDE.md`에 있다.
 
 재생 사본은 정적 호스팅의 단일 파일 크기 제한을 고려해 720p로 압축했다. 화면 분석용 스틸은 원본에서 추출한 자료를 별도로 제공한다.
 
 공개 호스팅에서 긴 원본 파일 탐색에 의존하지 않도록 각 분석 구간을 `dist/assets/media/clips/<ID>.mp4`로 분리했다. 화면에는 원본 릴의 타임코드를 표시하고, 플레이어와 프레임 탐색은 클립 내부 상대 시간을 사용한다.
 
 2026-10-22 사용자가 외부 열람을 요청했다. 링크로 외부에서 열람하는 공개 사이트로 전환하며, 편집 권한은 변경하지 않는다. AI 생성과 유료 벤치마크는 실행하지 않았다.
+
+## 호스팅
+
+2026-10-23부터 GitHub Pages(`meandfree23/vfx-notes`, https://meandfree23.github.io/vfx-notes/)에서 운영한다. `main`에 푸시하면 `.github/workflows/pages.yml`이 `dist/`를 그대로 게시한다. 2026-10-22까지 쓰던 ChatGPT Sites 주소(kj-vfx-notes.nonsense-k.chatgpt.site)는 더 이상 갱신하지 않는다.
+
+로컬 미리보기: `python3 preview.py` → http://127.0.0.1:8769/index.html (Range 요청 지원)
