@@ -11,7 +11,7 @@ const WORKFLOWS={
  C:[['지오메트리와 동작 설계','공간·접촉면·카메라·궤적을 실사 또는 3D 가이드로 고정합니다.'],['필수 플레이트·패스 확보','클린 플레이트, 반사, 인물, 깊이 등 해당 장면의 제어에 필요한 재료를 분리합니다.'],['AI를 보조 요소에 사용','룩·원경·재질·에셋 후보 제작에 AI를 활용하고, 정밀 구조와 물리는 유지합니다.'],['레이어별 검수','가림·접촉·반사·심도를 각각 확인한 뒤 모션블러·색·그레인을 통일합니다.']],
  D:[['연결 기준점 정하기','형태·시선·동작·텍스트 중 무엇이 앞뒤 이미지를 이어주는지 정합니다.'],['소스와 그래픽 분리','영상·지도·문자·그래프·골격 등의 소스를 별도 레이어로 준비합니다.'],['편집 곡선으로 연결','스케일·원근·마스크·초점·불투명도의 변화 시점을 직접 조절합니다.'],['전환의 의미 검수','임의의 모핑이 생기지 않는지, 기준점이 유지되고 정보가 의도대로 넘어가는지 확인합니다.']]
 };
-let CUTS=[],BY_ID={},archiveState={projectId:'',category:'전체',query:'',route:'',shown:20},videoCleanup=null,sectionObserver=null;
+let CUTS=[],BY_ID={},archiveState={projectId:'',category:'전체',query:'',route:'',shown:20,open:new Set(),groupShown:{},autoOpen:false,visibleGroups:[]},videoCleanup=null,sectionObserver=null;
 const E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const clock=t=>`${String(Math.floor(t/60)).padStart(2,'0')}:${String(Math.floor(t%60)).padStart(2,'0')}`;
 const precise=t=>`${String(Math.floor(t/60)).padStart(2,'0')}:${(t%60).toFixed(2).padStart(5,'0')}`;
@@ -42,21 +42,51 @@ function archive(projectId=''){
  <section aria-labelledby="selected-title"><div class="section-heading"><div><p class="eyebrow">SELECTED STUDIES</p><h2 id="selected-title">먼저 들여다볼 장면</h2></div><p>서로 다른 합성 원리를 보여주는 여섯 클립.</p></div><div class="featured-grid">${featured.map(id=>{const r=BY_ID[id],work=projectOf(r);return `<button class="feature" data-clip="${id}" aria-label="${E(r.title)} 분석 보기"><div class="feature-image"><img loading="lazy" src="${thumb(r)}" alt="${E(r.title)}"><span>${range(r)}</span></div><div class="feature-top"><span>${work.title} / ${id}</span><span class="arrow" aria-hidden="true">↗</span></div><h3>${E(r.title)}</h3><p>${category(r)} · ${ROUTES[r.route]}</p></button>`;}).join('')}</div></section>
  <section class="archive-section" id="clip-archive"><div class="section-heading archive-top"><div><p class="eyebrow">CLIP INDEX</p><h2>클립별 분석 기록</h2></div><p>작품과 기법을 함께 찾아보세요.</p></div>
  <div class="tools"><div class="category-tabs" role="group" aria-label="VFX 유형">${GROUPS.map(g=>`<button data-category="${g}" class="${g===archiveState.category?'active':''}" aria-pressed="${g===archiveState.category}">${g}</button>`).join('')}</div><label class="search"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></svg><input id="clip-search" type="search" value="${E(archiveState.query)}" placeholder="작품, 기법, 클립, 타임코드" aria-label="클립 검색"></label></div>
- <div class="subtools"><span id="result-count"></span><div class="filter-selects"><select id="project-filter" aria-label="작품 필터"><option value="">모든 작품</option>${PROJECTS.map(work=>`<option value="${work.id}" ${work.id===archiveState.projectId?'selected':''}>${E(work.title)}</option>`).join('')}</select><select id="route-filter" aria-label="구현 방식 필터"><option value="">모든 구현 방식</option>${Object.entries(ROUTES).map(([k,v])=>`<option value="${k}" ${archiveState.route===k?'selected':''}>${k} · ${v}</option>`).join('')}</select></div></div>
+ <div class="subtools"><span class="subtools-left"><span id="result-count"></span>${p?'':'<button id="group-toggle" class="group-toggle" type="button"></button>'}</span><div class="filter-selects"><select id="project-filter" aria-label="작품 필터"><option value="">모든 작품</option>${PROJECTS.map(work=>`<option value="${work.id}" ${work.id===archiveState.projectId?'selected':''}>${E(work.title)}</option>`).join('')}</select><select id="route-filter" aria-label="구현 방식 필터"><option value="">모든 구현 방식</option>${Object.entries(ROUTES).map(([k,v])=>`<option value="${k}" ${archiveState.route===k?'selected':''}>${k} · ${v}</option>`).join('')}</select></div></div>
  <div id="clip-list" class="clip-list"></div><button id="load-more" class="more"></button><p class="archive-note">촬영본·CG·최종 결과의 비교는 같은 분석 구간으로 묶었습니다. 카드 수는 본편의 편집 컷 수와 다릅니다. 타임코드는 각 작품의 분석 릴 기준입니다.</p></section>${p?`<section class="work-notes"><p class="eyebrow">SOURCE & SCOPE</p><p>${E(p.provenance)}</p><p>${E(p.method)}</p><a class="quiet-link" href="${p.analysis}" download>이 작품의 분석 원문 ↓</a></section><section class="related-projects"><div class="section-heading"><h2>다른 작품 살펴보기</h2></div><div class="project-grid">${PROJECTS.filter(x=>x!==p).map(projectCard).join('')}</div></section>`:''}</div>`;
  wireClipLinks();
- document.querySelector('#clip-search').addEventListener('input',e=>{archiveState.query=e.target.value;archiveState.shown=20;renderList();});
- document.querySelector('#project-filter').addEventListener('change',e=>{archiveState.projectId=e.target.value;archiveState.shown=20;renderList();});
- document.querySelector('#route-filter').addEventListener('change',e=>{archiveState.route=e.target.value;archiveState.shown=20;renderList();});
- MAIN.querySelectorAll('[data-category]').forEach(b=>b.onclick=()=>{archiveState.category=b.dataset.category;archiveState.shown=20;MAIN.querySelectorAll('[data-category]').forEach(x=>{const a=x===b;x.classList.toggle('active',a);x.setAttribute('aria-pressed',String(a));});renderList();});
- document.querySelector('#load-more').onclick=()=>{archiveState.shown+=20;renderList();};renderList();
+ document.querySelector('#clip-search').addEventListener('input',e=>{archiveState.query=e.target.value;archiveState.shown=20;archiveState.autoOpen=true;renderList();});
+ document.querySelector('#project-filter').addEventListener('change',e=>{archiveState.projectId=e.target.value;archiveState.shown=20;archiveState.autoOpen=true;renderList();});
+ document.querySelector('#route-filter').addEventListener('change',e=>{archiveState.route=e.target.value;archiveState.shown=20;archiveState.autoOpen=true;renderList();});
+ MAIN.querySelectorAll('[data-category]').forEach(b=>b.onclick=()=>{archiveState.category=b.dataset.category;archiveState.shown=20;archiveState.autoOpen=true;MAIN.querySelectorAll('[data-category]').forEach(x=>{const a=x===b;x.classList.toggle('active',a);x.setAttribute('aria-pressed',String(a));});renderList();});
+ document.querySelector('#load-more').onclick=()=>{archiveState.shown+=20;renderList();};
+ const groupToggle=document.querySelector('#group-toggle');if(groupToggle)groupToggle.onclick=()=>{const all=archiveState.visibleGroups.every(id=>archiveState.open.has(id));archiveState.open=new Set(all?[]:archiveState.visibleGroups);renderList();};renderList();
+}
+const GROUP_STEP=12;
+function clipRow(r,work=true){return `<button class="clip-row route-${r.route}" data-clip="${r.id}" aria-label="${r.id} ${E(r.title)} 분석 보기"><span class="clip-number">${r.id}</span><span class="row-thumb"><img loading="lazy" src="${thumb(r)}" alt=""></span><span>${work?`<span class="row-work">${E(projectOf(r).title)}</span>`:''}<span class="clip-title">${E(r.title)}</span><span class="clip-meta">${category(r)} · ${precise(r.start)}–${precise(r.end)} · AI 근사 ${r.ai}</span>${r.tags?`<span class="row-tags">${r.tags.map(E).join(' / ')}</span>`:''}</span><span class="route-label"><i class="route-dot"></i>${ROUTES[r.route]}</span><span class="clip-time">${(r.end-r.start).toFixed(1)} SEC</span><span class="arrow" aria-hidden="true">↗</span></button>`;}
+// Home archive: one foldable group per work, newest first. Filters open the groups that match.
+function clipGroup(p,rs,filtering){
+ const open=archiveState.open.has(p.id),total=CUTS.filter(r=>r.projectId===p.id).length,shown=archiveState.groupShown[p.id]||GROUP_STEP;
+ const peek=(filtering?rs.map(r=>r.id):[p.hero,...(p.featured||[])]).filter((id,i,a)=>BY_ID[id]&&a.indexOf(id)===i).slice(0,3);
+ return `<section class="clip-group${open?' open':''}"><button class="group-head" type="button" data-group="${p.id}" aria-expanded="${open}"${open?` aria-controls="group-${p.id}"`:''}><span class="group-case">CASE ${p.number}</span><span class="group-name"><strong>${E(p.title)}</strong><small>${E(p.studio)} · ${p.format} / ${p.year} · 분석 ${p.date}</small></span><span class="group-peek" aria-hidden="true">${peek.map(id=>`<img loading="lazy" src="${thumb(BY_ID[id])}" alt="">`).join('')}</span><span class="group-count">${filtering?`${rs.length} / ${total}`:total} CLIPS</span><span class="group-sign" aria-hidden="true"></span></button>${open?`<div class="group-body" id="group-${p.id}">${rs.slice(0,shown).map(r=>clipRow(r,false)).join('')}<div class="group-foot">${rs.length>shown?`<button class="group-more" type="button" data-more="${p.id}">이 작품 기록 더 보기 (${shown} / ${rs.length}) +</button>`:'<span></span>'}<a class="quiet-link" href="#project/${p.id}">작품 페이지에서 보기 →</a></div></div>`:''}</section>`;
+}
+function toggleGroup(id){
+ const opening=!archiveState.open.has(id);opening?archiveState.open.add(id):archiveState.open.delete(id);renderList();
+ const head=document.querySelector(`[data-group="${id}"]`);if(!head)return;head.focus({preventScroll:true});
+ if(!opening&&head.getBoundingClientRect().top<0)head.scrollIntoView({block:'start',behavior:'instant'});
 }
 function renderList(){
  const q=archiveState.query.trim().toLocaleLowerCase();
  const filtered=CUTS.filter(r=>(!archiveState.projectId||r.projectId===archiveState.projectId)&&(archiveState.category==='전체'||category(r)===archiveState.category)&&(!archiveState.route||r.route===archiveState.route)&&(!q||[projectOf(r).title,projectOf(r).english,projectOf(r).studio,r.id,r.title,...(r.tags||[]),...(r.reveal||[]),r.composition,r.vfx,r.implementation,r.check||'',r.insight||'',r.evidence||'',range(r),clock(r.start)].join(' ').toLocaleLowerCase().includes(q)));
- document.querySelector('#result-count').textContent=`${String(filtered.length).padStart(2,'0')}개 기록 / 전체 ${CUTS.length}개`;
- document.querySelector('#clip-list').innerHTML=filtered.length?filtered.slice(0,archiveState.shown).map(r=>`<button class="clip-row route-${r.route}" data-clip="${r.id}" aria-label="${r.id} ${E(r.title)} 분석 보기"><span class="clip-number">${r.id}</span><span class="row-thumb"><img loading="lazy" src="${thumb(r)}" alt=""></span><span><span class="row-work">${E(projectOf(r).title)}</span><span class="clip-title">${E(r.title)}</span><span class="clip-meta">${category(r)} · ${precise(r.start)}–${precise(r.end)} · AI 근사 ${r.ai}</span>${r.tags?`<span class="row-tags">${r.tags.map(E).join(' / ')}</span>`:''}</span><span class="route-label"><i class="route-dot"></i>${ROUTES[r.route]}</span><span class="clip-time">${(r.end-r.start).toFixed(1)} SEC</span><span class="arrow" aria-hidden="true">↗</span></button>`).join(''):'<div class="empty">조건에 맞는 클립이 없습니다.<br>다른 작품·단어·구현 방식을 선택해 주세요.</div>';
- const more=document.querySelector('#load-more');more.hidden=filtered.length<=archiveState.shown;more.textContent=`기록 더 보기 (${Math.min(filtered.length,archiveState.shown)} / ${filtered.length}) +`;wireClipLinks(document.querySelector('#clip-list'));
+ const list=document.querySelector('#clip-list'),more=document.querySelector('#load-more'),toggle=document.querySelector('#group-toggle'),grouped=!archiveState.projectId;
+ const count=`${String(filtered.length).padStart(2,'0')}개 기록 / 전체 ${CUTS.length}개`;
+ list.classList.toggle('grouped',grouped);if(toggle)toggle.hidden=!grouped||!filtered.length;
+ if(!filtered.length){document.querySelector('#result-count').textContent=count;list.innerHTML='<div class="empty">조건에 맞는 클립이 없습니다.<br>다른 작품·단어·구현 방식을 선택해 주세요.</div>';more.hidden=true;return;}
+ if(!grouped){
+  const limit=filtered.length-archiveState.shown<=5?filtered.length:archiveState.shown;  // no button for a handful left
+  document.querySelector('#result-count').textContent=count;list.innerHTML=filtered.slice(0,limit).map(r=>clipRow(r)).join('');
+  more.hidden=filtered.length<=limit;more.textContent=`기록 더 보기 (${limit} / ${filtered.length}) +`;wireClipLinks(list);return;
+ }
+ const filtering=Boolean(q||archiveState.category!=='전체'||archiveState.route);
+ const works=[...PROJECTS].reverse().map(p=>({p,rs:filtered.filter(r=>r.projectId===p.id)})).filter(w=>w.rs.length);
+ archiveState.visibleGroups=works.map(w=>w.p.id);
+ if(archiveState.autoOpen){archiveState.open=new Set(filtering?archiveState.visibleGroups:[]);archiveState.groupShown={};archiveState.autoOpen=false;}
+ document.querySelector('#result-count').textContent=`${count} · ${works.length}개 작품`;
+ list.innerHTML=works.map(({p,rs})=>clipGroup(p,rs,filtering)).join('');more.hidden=true;
+ if(toggle)toggle.textContent=archiveState.visibleGroups.every(id=>archiveState.open.has(id))?'모두 접기 −':'모두 펼치기 +';
+ list.querySelectorAll('[data-group]').forEach(b=>b.onclick=()=>toggleGroup(b.dataset.group));
+ list.querySelectorAll('[data-more]').forEach(b=>b.onclick=()=>{const id=b.dataset.more;archiveState.groupShown[id]=(archiveState.groupShown[id]||GROUP_STEP)+GROUP_STEP;renderList();});
+ wireClipLinks(list);
 }
 function sourcesFor(p,r){
  return `<li><a href="${p.video}" target="_blank" rel="noopener"><span>분석 기준 VFX Breakdown 릴<small>${E(p.studio)} · ${range(r)} / 브라우저 재생용 720p 사본</small></span><span>↗</span></a></li>${p.sources.map(x=>`<li><a href="${E(x.url)}" target="_blank" rel="noopener"><span>${E(x.title)}<small>${E(x.note)}</small></span><span>↗</span></a></li>`).join('')}<li><a href="https://open.higgsfield.ai/models/bytedance/seedance-2.5/video-edit/api-reference" target="_blank" rel="noopener"><span>Higgsfield · Seedance 2.5 공식 문서<small>기능 지원은 정밀 재현의 성공률과 별개입니다. 2026.10.23 확인</small></span><span>↗</span></a></li><li><a href="${p.analysis}" download><span>${E(p.title)} 컷별 분석 원문<small>화면 관찰·구현 제안·검수 기준 / Markdown</small></span><span>↓</span></a></li>`;
@@ -122,11 +152,14 @@ function about(){
  MAIN.innerHTML=`<article class="text-page"><p class="eyebrow red">ABOUT THIS ARCHIVE</p><h1>장면의 안쪽에<br>남겨둔 기록.</h1><p class="lead">좋은 VFX는 스스로를 드러내지 않을 때가 많습니다.<br>작품마다 출처를 남기고, 클립마다 관찰과 제안을 나누어 쌓습니다.</p><div class="about-meta"><div><small>등록 작품</small><strong>${PROJECTS.length}개</strong></div><div><small>분석 구간</small><strong>${CUTS.length}개</strong></div><div><small>대표 프레임</small><strong>${CUTS.length*3}장</strong></div></div><section class="text-block"><h2>작품 → 클립 → 기법</h2><p>작품별 페이지에서 전체 맥락을 읽고, 통합 목록에서는 기법과 구현 방식으로 서로 다른 작품의 장면을 비교할 수 있습니다. 새 영상은 같은 네 가지 분석 관점과 출처 기록을 유지하며 추가합니다.</p><p>화면 관찰은 공개 릴에서 확인한 정보이며, AI 구현 설계와 검수는 새로운 제작을 위한 제안입니다. AI 생성 테스트는 실행하지 않았습니다. 정성적 가능성은 같은 배우·동작·공간을 정확히 복제하는 성공률이 아닙니다.</p></section>${PROJECTS.map(p=>`<section class="text-block"><p class="eyebrow">CASE ${p.number} / ${p.date}</p><h2>${E(p.title)}</h2><p>${E(p.provenance)}</p><p>${E(p.method)}</p><p><a class="quiet-link" href="#project/${p.id}">작품 분석 보기 →</a></p><ul class="source-list">${p.sources.map(x=>`<li><a href="${E(x.url)}" target="_blank" rel="noopener"><span>${E(x.title)}<small>${E(x.note)}</small></span><span>↗</span></a></li>`).join('')}<li><a href="${p.csv}" download><span>이 작품의 클립 목록<small>타임코드와 구현 방식 · CSV</small></span><span>↓</span></a></li><li><a href="${p.analysis}" download><span>이 작품의 상세 분석<small>관찰·제작 제안·검수 · Markdown</small></span><span>↓</span></a></li></ul></section>`).join('')}<section class="text-block"><h2>재생 사본과 원본 자료</h2><p>플레이어는 브라우저용 720p 사본을 사용합니다. 프레임 표본은 분석 소스에서 추출했으며, 촬영 플레이트·EXR·카메라 트래킹 자료를 보유한 분석은 아닙니다. 타임코드는 작품 본편이 아닌 각 공개 릴을 기준으로 합니다.</p><a class="quiet-link" href="data/archive-clips.csv" download>전체 작품 클립 목록 ↓</a></section></article>`;
 }
 function notFound(){MAIN.innerHTML='<article class="text-page"><p class="eyebrow">RECORD NOT FOUND</p><h1>이 기록을 찾을 수 없습니다.</h1><a class="quiet-link" href="#archive">전체 아카이브로 돌아가기 →</a></article>';}
+let lastHash='';const scrollMemo={};
 function render(){
  if(videoCleanup){videoCleanup();videoCleanup=null;}if(sectionObserver){sectionObserver.disconnect();sectionObserver=null;}
  const hash=decodeURIComponent(location.hash.slice(1)||'archive');
+ if(lastHash)scrollMemo[lastHash]=window.scrollY;
+ const back=lastHash.startsWith('clip/')&&!hash.startsWith('clip/')&&scrollMemo[hash]!=null;lastHash=hash;
  if(hash.startsWith('clip/'))detail(hash.split('/')[1]);else if(hash.startsWith('project/')){archiveState.shown=20;archive(hash.split('/')[1]);}else if(hash==='method')method();else if(hash==='about')about();else archive();
- window.scrollTo({top:0,behavior:'auto'});
+ window.scrollTo({top:back?scrollMemo[hash]:0,behavior:'instant'});
 }
 window.addEventListener('hashchange',render);
 async function loadArchive(){
