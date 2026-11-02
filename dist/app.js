@@ -11,7 +11,7 @@ const WORKFLOWS={
  C:[['지오메트리와 동작 설계','공간·접촉면·카메라·궤적을 실사 또는 3D 가이드로 고정합니다.'],['필수 플레이트·패스 확보','클린 플레이트, 반사, 인물, 깊이 등 해당 장면의 제어에 필요한 재료를 분리합니다.'],['AI를 보조 요소에 사용','룩·원경·재질·에셋 후보 제작에 AI를 활용하고, 정밀 구조와 물리는 유지합니다.'],['레이어별 검수','가림·접촉·반사·심도를 각각 확인한 뒤 모션블러·색·그레인을 통일합니다.']],
  D:[['연결 기준점 정하기','형태·시선·동작·텍스트 중 무엇이 앞뒤 이미지를 이어주는지 정합니다.'],['소스와 그래픽 분리','영상·지도·문자·그래프·골격 등의 소스를 별도 레이어로 준비합니다.'],['편집 곡선으로 연결','스케일·원근·마스크·초점·불투명도의 변화 시점을 직접 조절합니다.'],['전환의 의미 검수','임의의 모핑이 생기지 않는지, 기준점이 유지되고 정보가 의도대로 넘어가는지 확인합니다.']]
 };
-let CUTS=[],BY_ID={},archiveState={projectId:'',category:'전체',query:'',route:'',shown:20,open:new Set(),groupShown:{},autoOpen:false,visibleGroups:[]},videoCleanup=null,sectionObserver=null;
+let CUTS=[],BY_ID={},archiveState={projectId:'',category:'전체',query:'',route:'',shown:20,open:new Set(),groupShown:{},autoOpen:false,visibleGroups:[],featuredWork:''},videoCleanup=null,sectionObserver=null;
 const E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const clock=t=>`${String(Math.floor(t/60)).padStart(2,'0')}:${String(Math.floor(t%60)).padStart(2,'0')}`;
 const precise=t=>`${String(Math.floor(t/60)).padStart(2,'0')}:${(t%60).toFixed(2).padStart(5,'0')}`;
@@ -35,16 +35,18 @@ function projectCard(p){
 function archive(projectId=''){
  const p=PROJECTS.find(p=>p.id===projectId);archiveState.projectId=p?.id||'';
  const rs=p?CUTS.filter(r=>r.projectId===p.id):CUTS;
- const featured=p?p.featured:PROJECTS.slice(-3).reverse().flatMap(work=>work.featured.slice(0,2));
  setActive('archive');document.title=p?`${p.title} — VFX Notes`:'VFX Notes — 장면의 안쪽';
  MAIN.innerHTML=`<div class="wrap">${p?`<div class="detail-breadcrumb"><a href="#archive">작품 아카이브</a><span>/</span><span>CASE ${p.number}</span></div><section class="intro project-intro"><div><p class="eyebrow red">CASE STUDY ${p.number} / ${p.format} · ${p.year}</p><h1>${E(p.title)}</h1><p class="project-subtitle">${E(p.english)} · ${E(p.studio)}</p></div><p class="intro-copy">${E(p.summary)}</p></section><button class="hero" data-clip="${p.hero}" aria-label="${E(BY_ID[p.hero].title)} 분석 보기"><img src="${thumb(BY_ID[p.hero])}" alt="${E(BY_ID[p.hero].title)}"><span class="hero-label">${E(p.director)} · ${p.year}</span><span class="hero-text"><p>${E(p.studio)}</p><h2>${E(BY_ID[p.hero].title)}</h2><span>대표 클립 분석 보기 →</span></span></button><div class="film-caption"><strong>${E(p.description)}</strong><span>릴 ${clock(p.duration)} · 분석 ${p.date}</span></div>`:`<section class="intro"><div><p class="eyebrow red">VISUAL EFFECTS RESEARCH ARCHIVE</p><h1>보이지 않는 기술,<br>보이는 이야기.</h1></div><p class="intro-copy">작품에서 장면으로, 장면에서 기술로.<br>구도와 합성의 원리를 차곡차곡 기록합니다.<br>작품·기법·구현 방식으로 필요한 장면을 찾아보세요.</p></section><section class="project-library" aria-labelledby="project-title"><div class="section-heading"><div><p class="eyebrow">FILM & SERIES LIBRARY</p><h2 id="project-title">작품별 분석</h2></div><p>${PROJECTS.length}개의 작품 · 계속 쌓이는 장면의 기록</p></div><div class="project-grid">${[...PROJECTS].reverse().map(projectCard).join('')}</div></section>`}
  <section class="overview" aria-label="아카이브 개요"><div><p class="overview-title">${p?'이 작품을,':'한 장면을,'}<br>네 가지 관점으로 읽습니다.</p></div><div><b>${rs.length}<small>CLIPS</small></b><p>숏·전환 분석 구간</p></div><div><b>${rs.length*3}<small>FRAMES</small></b><p>클립별 대표 프레임</p></div><div><b>04<small>VIEWS</small></b><p>구도 · VFX · 구현 · 검수</p></div></section>
- <section aria-labelledby="selected-title"><div class="section-heading"><div><p class="eyebrow">SELECTED STUDIES</p><h2 id="selected-title">먼저 들여다볼 장면</h2></div><p>서로 다른 합성 원리를 보여주는 여섯 클립.</p></div><div class="featured-grid">${featured.map(id=>{const r=BY_ID[id],work=projectOf(r);return `<button class="feature" data-clip="${id}" aria-label="${E(r.title)} 분석 보기"><div class="feature-image"><img loading="lazy" src="${thumb(r)}" alt="${E(r.title)}"><span>${range(r)}</span></div><div class="feature-top"><span>${work.title} / ${id}</span><span class="arrow" aria-hidden="true">↗</span></div><h3>${E(r.title)}</h3><p>${category(r)} · ${ROUTES[r.route]}</p></button>`;}).join('')}</div></section>
+ <section aria-labelledby="selected-title"><div class="section-heading"><div><p class="eyebrow">SELECTED STUDIES</p><h2 id="selected-title">먼저 들여다볼 장면</h2></div><p>${p?'서로 다른 합성 원리를 보여주는 여섯 클립.':'작품마다 먼저 볼 여섯 클립.'}</p></div>${p?`<div class="featured-grid">${p.featured.map(featureCard).join('')}</div>`:`<div class="work-strip"><button type="button" class="strip-arrow" data-dir="-1" aria-label="앞 작품들 보기">‹</button><div class="work-tabs" role="group" aria-label="작품 선택">${[...PROJECTS].reverse().map(w=>`<button type="button" data-work="${w.id}" aria-pressed="false">${E(w.title)}</button>`).join('')}</div><button type="button" class="strip-arrow" data-dir="1" aria-label="뒤 작품들 보기">›</button></div><div id="featured-work"></div>`}</section>
  <section class="archive-section" id="clip-archive"><div class="section-heading archive-top"><div><p class="eyebrow">CLIP INDEX</p><h2>클립별 분석 기록</h2></div><p>작품과 기법을 함께 찾아보세요.</p></div>
  <div class="tools"><div class="category-tabs" role="group" aria-label="VFX 유형">${GROUPS.map(g=>`<button data-category="${g}" class="${g===archiveState.category?'active':''}" aria-pressed="${g===archiveState.category}">${g}</button>`).join('')}</div><label class="search"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></svg><input id="clip-search" type="search" value="${E(archiveState.query)}" placeholder="작품, 기법, 클립, 타임코드" aria-label="클립 검색"></label></div>
  <div class="subtools"><span class="subtools-left"><span id="result-count"></span>${p?'':'<button id="group-toggle" class="group-toggle" type="button"></button>'}</span><div class="filter-selects"><select id="project-filter" aria-label="작품 필터"><option value="">모든 작품</option>${PROJECTS.map(work=>`<option value="${work.id}" ${work.id===archiveState.projectId?'selected':''}>${E(work.title)}</option>`).join('')}</select><select id="route-filter" aria-label="구현 방식 필터"><option value="">모든 구현 방식</option>${Object.entries(ROUTES).map(([k,v])=>`<option value="${k}" ${archiveState.route===k?'selected':''}>${k} · ${v}</option>`).join('')}</select></div></div>
  <div id="clip-list" class="clip-list"></div><button id="load-more" class="more"></button><p class="archive-note">촬영본·CG·최종 결과의 비교는 같은 분석 구간으로 묶었습니다. 카드 수는 본편의 편집 컷 수와 다릅니다. 타임코드는 각 작품의 분석 릴 기준입니다.</p></section>${p?`<section class="work-notes"><p class="eyebrow">SOURCE & SCOPE</p><p>${E(p.provenance)}</p><p>${E(p.method)}</p><a class="quiet-link" href="${p.analysis}" download>이 작품의 분석 원문 ↓</a></section><section class="related-projects"><div class="section-heading"><h2>다른 작품 살펴보기</h2></div><div class="project-grid">${PROJECTS.filter(x=>x!==p).map(projectCard).join('')}</div></section>`:''}</div>`;
  wireClipLinks();
+ MAIN.querySelectorAll('[data-work]').forEach(b=>b.onclick=()=>{archiveState.featuredWork=b.dataset.work;renderFeatured();b.scrollIntoView({block:'nearest',inline:'nearest'});});renderFeatured(true);
+ const strip=MAIN.querySelector('.work-tabs');
+ if(strip){const arrows=MAIN.querySelectorAll('.strip-arrow'),sync=()=>{const start=strip.scrollLeft<=2,end=strip.scrollLeft+strip.clientWidth>=strip.scrollWidth-2;arrows[0].disabled=start;arrows[1].disabled=end;strip.classList.toggle('fade-l',!start);strip.classList.toggle('fade-r',!end);};arrows.forEach(a=>a.onclick=()=>strip.scrollBy({left:a.dataset.dir*strip.clientWidth*.7,behavior:'smooth'}));strip.addEventListener('scroll',sync,{passive:true});sync();}
  document.querySelector('#clip-search').addEventListener('input',e=>{archiveState.query=e.target.value;archiveState.shown=20;archiveState.autoOpen=true;renderList();});
  document.querySelector('#project-filter').addEventListener('change',e=>{archiveState.projectId=e.target.value;archiveState.shown=20;archiveState.autoOpen=true;renderList();});
  document.querySelector('#route-filter').addEventListener('change',e=>{archiveState.route=e.target.value;archiveState.shown=20;archiveState.autoOpen=true;renderList();});
@@ -64,6 +66,19 @@ function toggleGroup(id){
  const opening=!archiveState.open.has(id);opening?archiveState.open.add(id):archiveState.open.delete(id);renderList();
  const head=document.querySelector(`[data-group="${id}"]`);if(!head)return;head.focus({preventScroll:true});
  if(!opening&&head.getBoundingClientRect().top<0)head.scrollIntoView({block:'start',behavior:'instant'});
+}
+function featureCard(id){
+ const r=BY_ID[id];return `<button class="feature" data-clip="${id}" aria-label="${E(r.title)} 분석 보기"><div class="feature-image"><img loading="lazy" src="${thumb(r)}" alt="${E(r.title)}"><span>${range(r)}</span></div><div class="feature-top"><span>${id}</span><span class="arrow" aria-hidden="true">↗</span></div><h3>${E(r.title)}</h3><p>${category(r)} · ${ROUTES[r.route]}</p></button>`;
+}
+// Home 'selected studies': one work at a time, picked from a row of work tabs (newest first).
+function renderFeatured(first=false){
+ const box=document.querySelector('#featured-work');if(!box)return;
+ const w=PROJECTS.find(x=>x.id===archiveState.featuredWork)||PROJECTS[PROJECTS.length-1];archiveState.featuredWork=w.id;
+ const tabs=document.querySelector('.work-tabs');let active=null;
+ tabs.querySelectorAll('[data-work]').forEach(b=>{const a=b.dataset.work===w.id;b.classList.toggle('active',a);b.setAttribute('aria-pressed',String(a));if(a)active=b;});
+ if(first&&active)tabs.scrollLeft=active.offsetLeft-24;
+ box.innerHTML=`<div class="featured-head"><span>CASE ${w.number} · ${E(w.studio)} · ${w.format} / ${w.year} · ${CUTS.filter(r=>r.projectId===w.id).length} CLIPS</span><a class="quiet-link" href="#project/${w.id}">작품 페이지에서 보기 →</a></div><div class="featured-grid">${w.featured.filter(id=>BY_ID[id]).map(featureCard).join('')}</div>`;
+ wireClipLinks(box);
 }
 function renderList(){
  const q=archiveState.query.trim().toLocaleLowerCase();
