@@ -29,7 +29,8 @@
       35.264
     ],
     "approx": true,
-    "chapter": "계절 변환"
+    "chapter": "계절 변환",
+    "updated": "2026.10.30"
   },
   {
     "id": "M02",
@@ -60,7 +61,8 @@
       57.622
     ],
     "approx": true,
-    "chapter": "계절 변환"
+    "chapter": "계절 변환",
+    "updated": "2026.10.30"
   },
   {
     "id": "M03",
@@ -92,7 +94,8 @@
       97.351
     ],
     "approx": true,
-    "chapter": "CG 소품"
+    "chapter": "CG 소품",
+    "updated": "2026.10.30"
   },
   {
     "id": "M04",
@@ -124,7 +127,8 @@
       110.24
     ],
     "approx": true,
-    "chapter": "창문 교체"
+    "chapter": "창문 교체",
+    "updated": "2026.10.30"
   },
   {
     "id": "M05",
@@ -155,7 +159,8 @@
       114.921
     ],
     "approx": true,
-    "chapter": "클린업"
+    "chapter": "클린업",
+    "updated": "2026.10.30"
   },
   {
     "id": "M06",
@@ -186,7 +191,8 @@
       130.629
     ],
     "approx": true,
-    "chapter": "눈"
+    "chapter": "눈",
+    "updated": "2026.10.30"
   },
   {
     "id": "M07",
@@ -217,7 +223,8 @@
       144.967
     ],
     "approx": true,
-    "chapter": "매트페인팅"
+    "chapter": "매트페인팅",
+    "updated": "2026.10.30"
   },
   {
     "id": "M08",
@@ -247,7 +254,8 @@
       152.672
     ],
     "approx": true,
-    "chapter": "하늘 교체"
+    "chapter": "하늘 교체",
+    "updated": "2026.10.30"
   },
   {
     "id": "M09",
@@ -277,7 +285,8 @@
       156.087
     ],
     "approx": true,
-    "chapter": "실내 확장"
+    "chapter": "실내 확장",
+    "updated": "2026.10.30"
   },
   {
     "id": "M10",
@@ -309,7 +318,8 @@
       167.788
     ],
     "approx": true,
-    "chapter": "세트 확장"
+    "chapter": "세트 확장",
+    "updated": "2026.10.30"
   },
   {
     "id": "M11",
@@ -339,7 +349,8 @@
       172.569
     ],
     "approx": true,
-    "chapter": "시대 복원"
+    "chapter": "시대 복원",
+    "updated": "2026.10.30"
   },
   {
     "id": "M12",
@@ -370,7 +381,8 @@
       178.966
     ],
     "approx": true,
-    "chapter": "건축 환경"
+    "chapter": "건축 환경",
+    "updated": "2026.10.30"
   },
   {
     "id": "M13",
@@ -400,7 +412,8 @@
       182.871
     ],
     "approx": true,
-    "chapter": "도시 복원"
+    "chapter": "도시 복원",
+    "updated": "2026.10.30"
   },
   {
     "id": "M14",
@@ -430,7 +443,8 @@
       188.91
     ],
     "approx": true,
-    "chapter": "창문 합성"
+    "chapter": "창문 합성",
+    "updated": "2026.10.30"
   },
   {
     "id": "M15",
@@ -461,7 +475,8 @@
       211.767
     ],
     "approx": true,
-    "chapter": "도시 야경"
+    "chapter": "도시 야경",
+    "updated": "2026.10.30"
   },
   {
     "id": "M16",
@@ -491,7 +506,8 @@
       221.259
     ],
     "approx": true,
-    "chapter": "건물 확장"
+    "chapter": "건물 확장",
+    "updated": "2026.10.30"
   },
   {
     "id": "M17",
@@ -521,7 +537,8 @@
       226.347
     ],
     "approx": true,
-    "chapter": "세트 확장"
+    "chapter": "세트 확장",
+    "updated": "2026.10.30"
   },
   {
     "id": "M18",
@@ -552,7 +569,8 @@
       227.843
     ],
     "approx": true,
-    "chapter": "간판"
+    "chapter": "간판",
+    "updated": "2026.10.30"
   },
   {
     "id": "M19",
@@ -582,7 +600,8 @@
       229.126
     ],
     "approx": true,
-    "chapter": "그린스크린"
+    "chapter": "그린스크린",
+    "updated": "2026.10.30"
   },
   {
     "id": "M20",
@@ -613,7 +632,8 @@
       230.281
     ],
     "approx": true,
-    "chapter": "간판"
+    "chapter": "간판",
+    "updated": "2026.10.30"
   },
   {
     "id": "M21",
@@ -644,7 +664,8 @@
       231.622
     ],
     "approx": true,
-    "chapter": "그린스크린"
+    "chapter": "그린스크린",
+    "updated": "2026.10.30"
   },
   {
     "id": "M22",
@@ -675,7 +696,8 @@
       233.25
     ],
     "approx": true,
-    "chapter": "그린스크린"
+    "chapter": "그린스크린",
+    "updated": "2026.10.30"
   },
   {
     "id": "M23",
@@ -706,7 +728,8 @@
       234.416
     ],
     "approx": true,
-    "chapter": "간판"
+    "chapter": "간판",
+    "updated": "2026.10.30"
   },
   {
     "id": "M24",
@@ -736,7 +759,8 @@
       235.751
     ],
     "approx": true,
-    "chapter": "그린스크린"
+    "chapter": "그린스크린",
+    "updated": "2026.10.30"
   },
   {
     "id": "M25",
@@ -767,7 +791,8 @@
       237.884
     ],
     "approx": true,
-    "chapter": "그린스크린"
+    "chapter": "그린스크린",
+    "updated": "2026.10.30"
   },
   {
     "id": "M26",
@@ -798,7 +823,8 @@
       239.275
     ],
     "approx": true,
-    "chapter": "간판"
+    "chapter": "간판",
+    "updated": "2026.10.30"
   },
   {
     "id": "M27",
@@ -829,7 +855,8 @@
       240.783
     ],
     "approx": true,
-    "chapter": "그린스크린"
+    "chapter": "그린스크린",
+    "updated": "2026.10.30"
   },
   {
     "id": "M28",
@@ -860,7 +887,8 @@
       242.965
     ],
     "approx": true,
-    "chapter": "그린스크린"
+    "chapter": "그린스크린",
+    "updated": "2026.10.30"
   },
   {
     "id": "M29",
@@ -890,7 +918,8 @@
       244.253
     ],
     "approx": true,
-    "chapter": "매트페인팅"
+    "chapter": "매트페인팅",
+    "updated": "2026.10.30"
   },
   {
     "id": "M30",
@@ -921,7 +950,8 @@
       245.451
     ],
     "approx": true,
-    "chapter": "매트페인팅"
+    "chapter": "매트페인팅",
+    "updated": "2026.10.30"
   },
   {
     "id": "M31",
@@ -952,7 +982,8 @@
       246.804
     ],
     "approx": true,
-    "chapter": "매트페인팅"
+    "chapter": "매트페인팅",
+    "updated": "2026.10.30"
   },
   {
     "id": "M32",
@@ -983,7 +1014,8 @@
       248.849
     ],
     "approx": true,
-    "chapter": "야경"
+    "chapter": "야경",
+    "updated": "2026.10.30"
   },
   {
     "id": "M33",
@@ -1013,7 +1045,8 @@
       251.531
     ],
     "approx": true,
-    "chapter": "야경"
+    "chapter": "야경",
+    "updated": "2026.10.30"
   },
   {
     "id": "M34",
@@ -1043,7 +1076,8 @@
       252.959
     ],
     "approx": true,
-    "chapter": "창밖 합성"
+    "chapter": "창밖 합성",
+    "updated": "2026.10.30"
   },
   {
     "id": "M35",
@@ -1074,7 +1108,8 @@
       260.242
     ],
     "approx": true,
-    "chapter": "건물 확장"
+    "chapter": "건물 확장",
+    "updated": "2026.10.30"
   },
   {
     "id": "M36",
@@ -1104,7 +1139,8 @@
       262.823
     ],
     "approx": true,
-    "chapter": "계절 변환"
+    "chapter": "계절 변환",
+    "updated": "2026.10.30"
   },
   {
     "id": "M37",
@@ -1134,7 +1170,8 @@
       264.346
     ],
     "approx": true,
-    "chapter": "계절 변환"
+    "chapter": "계절 변환",
+    "updated": "2026.10.30"
   },
   {
     "id": "M38",
@@ -1164,7 +1201,8 @@
       267.461
     ],
     "approx": true,
-    "chapter": "계절 변환"
+    "chapter": "계절 변환",
+    "updated": "2026.10.30"
   },
   {
     "id": "M39",
@@ -1195,7 +1233,8 @@
       270.876
     ],
     "approx": true,
-    "chapter": "야경"
+    "chapter": "야경",
+    "updated": "2026.10.30"
   },
   {
     "id": "M40",
@@ -1227,7 +1266,8 @@
       283.406
     ],
     "approx": true,
-    "chapter": "CG 항공기"
+    "chapter": "CG 항공기",
+    "updated": "2026.10.30"
   },
   {
     "id": "M41",
@@ -1257,7 +1297,8 @@
       293.475
     ],
     "approx": true,
-    "chapter": "CG 항공기"
+    "chapter": "CG 항공기",
+    "updated": "2026.10.30"
   },
   {
     "id": "M42",
@@ -1288,7 +1329,8 @@
       297.736
     ],
     "approx": true,
-    "chapter": "시대 복원"
+    "chapter": "시대 복원",
+    "updated": "2026.10.30"
   },
   {
     "id": "M43",
@@ -1320,6 +1362,7 @@
       331.57
     ],
     "approx": true,
-    "chapter": "간판 교체"
+    "chapter": "간판 교체",
+    "updated": "2026.10.30"
   }
 ]

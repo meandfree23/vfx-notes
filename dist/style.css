@@ -61,3 +61,7 @@
 .work-tabs button.active:after{content:'';position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--red)}
 .featured-head{display:flex;align-items:center;justify-content:space-between;gap:20px;margin:18px 0 22px;font-size:11px;color:var(--muted)}
 @media(max-width:760px){.strip-arrow{display:none}.work-tabs{gap:18px}.work-tabs button{font-size:11px;padding:10px 0}.featured-head{flex-direction:column;align-items:flex-start;gap:8px;font-size:10px;margin:14px 0 18px}}
+
+/* Update dates */
+.featured-head,.group-name small,.project-card-meta,.film-caption,.clip-meta,.feature-top,.text-block .eyebrow{word-break:keep-all;overflow-wrap:anywhere}
+.field-note{display:block;font-style:normal;font-size:10px;color:var(--muted);margin-top:2px}

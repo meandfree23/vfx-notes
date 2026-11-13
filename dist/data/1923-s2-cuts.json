@@ -217,7 +217,8 @@
       24.5
     ],
     "approx": true,
-    "chapter": "열차"
+    "chapter": "열차",
+    "updated": "2026.10.30"
   },
   {
     "id": "Y08",
@@ -467,7 +468,8 @@
       62.2
     ],
     "approx": true,
-    "chapter": "초원"
+    "chapter": "초원",
+    "updated": "2026.10.30"
   },
   {
     "id": "Y16",
@@ -626,7 +628,8 @@
       87.5
     ],
     "approx": true,
-    "chapter": "CG 환경"
+    "chapter": "CG 환경",
+    "updated": "2026.10.30"
   },
   {
     "id": "Y21",
