@@ -107,8 +107,15 @@ function renderList(){
  list.querySelectorAll('[data-more]').forEach(b=>b.onclick=()=>{const id=b.dataset.more;archiveState.groupShown[id]=(archiveState.groupShown[id]||GROUP_STEP)+GROUP_STEP;renderList();});
  wireClipLinks(list);
 }
+// The reel link opens the official video at this clip (copies are no longer hosted; 2026-11-16).
+// decision-to-leave has no public reel, so it keeps its 720p copy.
+function reelLink(p,r){
+ if(!/^https?:/.test(p.video))return `<li><a href="${p.video}" target="_blank" rel="noopener"><span>분석 기준 VFX Breakdown 릴<small>${E(p.studio)} · ${range(r)} / 브라우저 재생용 720p 사본</small></span><span>↗</span></a></li>`;
+ const t=Math.floor(r.start),u=/vimeo\.com/.test(p.video)?`${p.video}#t=${t}s`:`${p.video}${p.video.includes('?')?'&':'?'}t=${t}s`;
+ return `<li><a href="${E(u)}" target="_blank" rel="noopener"><span>분석 기준 VFX Breakdown 릴 · 이 구간부터 보기<small>${E(p.studio)} · ${range(r)} / 공식 공개 영상</small></span><span>↗</span></a></li>`;
+}
 function sourcesFor(p,r){
- return `<li><a href="${p.video}" target="_blank" rel="noopener"><span>분석 기준 VFX Breakdown 릴<small>${E(p.studio)} · ${range(r)} / 브라우저 재생용 720p 사본</small></span><span>↗</span></a></li>${p.sources.map(x=>`<li><a href="${E(x.url)}" target="_blank" rel="noopener"><span>${E(x.title)}<small>${E(x.note)}</small></span><span>↗</span></a></li>`).join('')}<li><a href="https://open.higgsfield.ai/models/bytedance/seedance-2.5/video-edit/api-reference" target="_blank" rel="noopener"><span>Higgsfield · Seedance 2.5 공식 문서<small>기능 지원은 정밀 재현의 성공률과 별개입니다. 2026.10.23 확인</small></span><span>↗</span></a></li><li><a href="${p.analysis}" download><span>${E(p.title)} 컷별 분석 원문<small>화면 관찰·구현 제안·검수 기준 / Markdown</small></span><span>↓</span></a></li>`;
+ return `${reelLink(p,r)}${p.sources.filter(x=>x.url!==p.video).map(x=>`<li><a href="${E(x.url)}" target="_blank" rel="noopener"><span>${E(x.title)}<small>${E(x.note)}</small></span><span>↗</span></a></li>`).join('')}<li><a href="https://open.higgsfield.ai/models/bytedance/seedance-2.5/video-edit/api-reference" target="_blank" rel="noopener"><span>Higgsfield · Seedance 2.5 공식 문서<small>기능 지원은 정밀 재현의 성공률과 별개입니다. 2026.10.23 확인</small></span><span>↗</span></a></li><li><a href="${p.analysis}" download><span>${E(p.title)} 컷별 분석 원문<small>화면 관찰·구현 제안·검수 기준 / Markdown</small></span><span>↓</span></a></li>`;
 }
 function insightFor(r){
  if(r.insight)return E(r.insight);

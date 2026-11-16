@@ -65,7 +65,7 @@
     ],
     "cuts": "data/mindhunter-cuts.json",
     "thumbBase": "assets/thumbs/mindhunter-s1",
-    "video": "assets/media/mindhunter-s1.mp4",
+    "video": "https://www.youtube.com/watch?v=Di4Byf1EzRE",
     "hero": "M03",
     "featured": [
       "M03",
@@ -120,7 +120,7 @@
     ],
     "cuts": "data/gone-girl-cuts.json",
     "thumbBase": "assets/thumbs/gone-girl",
-    "video": "assets/media/gone-girl.mp4",
+    "video": "https://vimeo.com/115019179",
     "hero": "G04",
     "featured": [
       "G04",
@@ -174,7 +174,7 @@
     ],
     "cuts": "data/the-killer-cuts.json",
     "thumbBase": "assets/thumbs/the-killer",
-    "video": "assets/media/the-killer.mp4",
+    "video": "https://www.youtube.com/watch?v=ytgPetbEemI",
     "hero": "K02",
     "featured": [
       "K02",
@@ -223,7 +223,7 @@
     ],
     "cuts": "data/mank-cuts.json",
     "thumbBase": "assets/thumbs/mank",
-    "video": "assets/media/mank.mp4",
+    "video": "https://www.youtube.com/watch?v=ML1gqsRCSqc",
     "hero": "N12",
     "featured": [
       "N12",
@@ -272,7 +272,7 @@
     ],
     "cuts": "data/gilded-age-s3-cuts.json",
     "thumbBase": "assets/thumbs/gilded-age-s3",
-    "video": "assets/media/gilded-age-s3.mp4",
+    "video": "https://www.youtube.com/watch?v=UdaXqmx21Ac",
     "hero": "A01",
     "featured": [
       "A01",
@@ -321,7 +321,7 @@
     ],
     "cuts": "data/the-holdovers-cuts.json",
     "thumbBase": "assets/thumbs/the-holdovers",
-    "video": "assets/media/the-holdovers.mp4",
+    "video": "https://www.youtube.com/watch?v=V9xwhL05aAw",
     "hero": "H08",
     "featured": [
       "H08",
@@ -370,7 +370,7 @@
     ],
     "cuts": "data/1923-s2-cuts.json",
     "thumbBase": "assets/thumbs/1923-s2",
-    "video": "assets/media/1923-s2.mp4",
+    "video": "https://www.youtube.com/watch?v=evQrFN5PSV0",
     "hero": "Y13",
     "featured": [
       "Y13",
@@ -419,7 +419,7 @@
     ],
     "cuts": "data/john-wick-4-arc-cuts.json",
     "thumbBase": "assets/thumbs/john-wick-4-arc",
-    "video": "assets/media/john-wick-4-arc.mp4",
+    "video": "https://www.youtube.com/watch?v=mh5wzjQqBKo",
     "hero": "J03",
     "featured": [
       "J03",
@@ -468,7 +468,7 @@
     ],
     "cuts": "data/the-residence-cuts.json",
     "thumbBase": "assets/thumbs/the-residence",
-    "video": "assets/media/the-residence.mp4",
+    "video": "https://www.youtube.com/watch?v=3j5fABhH-5Y",
     "hero": "R03",
     "featured": [
       "R03",
@@ -518,7 +518,7 @@
     ],
     "cuts": "data/blade-runner-2049-cuts.json",
     "thumbBase": "assets/thumbs/blade-runner-2049",
-    "video": "assets/media/blade-runner-2049.mp4",
+    "video": "https://www.youtube.com/watch?v=vxLd7FkZJeA",
     "hero": "B15",
     "featured": [
       "B15",
@@ -568,7 +568,7 @@
     ],
     "cuts": "data/bridgerton-s4-cuts.json",
     "thumbBase": "assets/thumbs/bridgerton-s4",
-    "video": "assets/media/bridgerton-s4.mp4",
+    "video": "https://www.youtube.com/watch?v=oW75TAYCQho",
     "hero": "P02",
     "featured": [
       "P02",
@@ -617,7 +617,7 @@
     ],
     "cuts": "data/foundation-s3-cuts.json",
     "thumbBase": "assets/thumbs/foundation-s3",
-    "video": "assets/media/foundation-s3.mp4",
+    "video": "https://www.youtube.com/watch?v=1nQIpw23rcY",
     "hero": "F03",
     "featured": [
       "F03",
@@ -672,7 +672,7 @@
     ],
     "cuts": "data/uncharted-one-shot-cuts.json",
     "thumbBase": "assets/thumbs/uncharted-one-shot",
-    "video": "assets/media/uncharted-one-shot.mp4",
+    "video": "https://www.youtube.com/watch?v=CZOruPaF6-Q",
     "hero": "U01",
     "featured": [
       "U01",
@@ -725,7 +725,7 @@
     ],
     "cuts": "data/the-lost-bus-cuts.json",
     "thumbBase": "assets/thumbs/the-lost-bus",
-    "video": "assets/media/the-lost-bus.mp4",
+    "video": "https://www.youtube.com/watch?v=iCsNRVpwtfo",
     "hero": "L18",
     "featured": [
       "L02",
@@ -775,7 +775,7 @@
     ],
     "cuts": "data/elysium-cuts.json",
     "thumbBase": "assets/thumbs/elysium",
-    "video": "assets/media/elysium.mp4",
+    "video": "https://www.youtube.com/watch?v=VRWGdaetwcc",
     "hero": "E15",
     "featured": [
       "E01",
@@ -823,7 +823,7 @@
     ],
     "cuts": "data/dune-hunter-seeker-cuts.json",
     "thumbBase": "assets/thumbs/dune-hunter-seeker",
-    "video": "assets/media/dune-hunter-seeker.mp4",
+    "video": "https://www.youtube.com/watch?v=z-z2rhTsi0Y",
     "hero": "W07",
     "featured": [
       "W01",
@@ -871,7 +871,7 @@
     ],
     "cuts": "data/napoleon-cuts.json",
     "thumbBase": "assets/thumbs/napoleon",
-    "video": "assets/media/napoleon.mp4",
+    "video": "https://www.youtube.com/watch?v=Tq8DaTOKSNc",
     "hero": "C04",
     "featured": [
       "C04",
@@ -921,7 +921,7 @@
     ],
     "cuts": "data/witcher-s1-cinesite-cuts.json",
     "thumbBase": "assets/thumbs/witcher-s1-cinesite",
-    "video": "assets/media/witcher-s1-cinesite.mp4",
+    "video": "https://www.youtube.com/watch?v=npM_UaqJW6A",
     "hero": "T03",
     "featured": [
       "T03",
@@ -971,7 +971,7 @@
     ],
     "cuts": "data/empire-of-light-cuts.json",
     "thumbBase": "assets/thumbs/empire-of-light",
-    "video": "assets/media/empire-of-light.mp4",
+    "video": "https://www.youtube.com/watch?v=QKD21lScU4U",
     "hero": "V22",
     "featured": [
       "V02",
@@ -1020,7 +1020,7 @@
     ],
     "cuts": "data/mrs-america-crowd-cuts.json",
     "thumbBase": "assets/thumbs/mrs-america-crowd",
-    "video": "assets/media/mrs-america-crowd.mp4",
+    "video": "https://www.youtube.com/watch?v=3MdN07Y3sa8",
     "hero": "D07",
     "featured": [
       "D02",
@@ -1070,7 +1070,7 @@
     ],
     "cuts": "data/banshees-of-inisherin-cuts.json",
     "thumbBase": "assets/thumbs/banshees-of-inisherin",
-    "video": "assets/media/banshees-of-inisherin.mp4",
+    "video": "https://www.youtube.com/watch?v=A_zc99BOlo4",
     "hero": "Q32",
     "featured": [
       "Q01",
@@ -1120,7 +1120,7 @@
     ],
     "cuts": "data/shadow-and-bone-s1-ghost-cuts.json",
     "thumbBase": "assets/thumbs/shadow-and-bone-s1-ghost",
-    "video": "assets/media/shadow-and-bone-s1-ghost.mp4",
+    "video": "https://www.youtube.com/watch?v=pJ9CUCNnAKY",
     "hero": "X03",
     "featured": [
       "X03",
@@ -1170,7 +1170,7 @@
     ],
     "cuts": "data/san-andreas-cuts.json",
     "thumbBase": "assets/thumbs/san-andreas",
-    "video": "assets/media/san-andreas.mp4",
+    "video": "https://www.youtube.com/watch?v=rjFJf0l1lk4",
     "hero": "Z17",
     "featured": [
       "Z08",
@@ -1220,7 +1220,7 @@
     ],
     "cuts": "data/wicked-for-good-cuts.json",
     "thumbBase": "assets/thumbs/wicked-for-good",
-    "video": "assets/media/wicked-for-good.mp4",
+    "video": "https://www.youtube.com/watch?v=zvi0g4VxUD4",
     "hero": "WG23",
     "featured": [
       "WG01",
@@ -1270,7 +1270,7 @@
     ],
     "cuts": "data/jojo-rabbit-cuts.json",
     "thumbBase": "assets/thumbs/jojo-rabbit",
-    "video": "assets/media/jojo-rabbit.mp4",
+    "video": "https://www.youtube.com/watch?v=e2v9ITmnIgo",
     "hero": "JR22",
     "featured": [
       "JR01",
