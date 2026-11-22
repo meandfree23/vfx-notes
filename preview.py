@@ -2,8 +2,16 @@ from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
 import os,re
 ROOT=Path(__file__).resolve().parent/"dist"
+# 2026-11-22부터 새 작품의 클립·프레임은 git 밖 미디어 폴더(Cloudflare로 배포)에 있다. dist에 없는 /assets/ 파일은 거기서 찾는다.
+MEDIA=Path(__file__).resolve().parent.parent/"vfx-notes-media"
 class Handler(SimpleHTTPRequestHandler):
  def __init__(self,*a,**kw):super().__init__(*a,directory=str(ROOT),**kw)
+ def translate_path(self,path):
+  p=super().translate_path(path)
+  if not os.path.exists(p) and path.split('?',1)[0].startswith('/assets/'):
+   q=os.path.join(str(MEDIA),os.path.relpath(p,str(ROOT)))
+   if os.path.isfile(q):return q
+  return p
  def send_head(self):
   path=self.translate_path(self.path)
   if not self.headers.get('Range') or not os.path.isfile(path):return super().send_head()
