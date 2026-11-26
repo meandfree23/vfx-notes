@@ -1758,8 +1758,60 @@
     "media": "https://vfx-notes-media.meandfree23.workers.dev/"
   },
   {
-    "id": "frankenstein-mrx",
+    "id": "we-were-the-lucky-ones-crafty",
     "number": "036",
+    "title": "위 워 더 럭키 원스 · 초록 막 너머로 다시 세운 전쟁기의 거리와 역",
+    "english": "We Were the Lucky Ones · Wartime Streets and Stations Rebuilt Past the Green Screen",
+    "year": "2024",
+    "format": "시리즈",
+    "director": "토머스 케일 외(쇼러너 에리카 리페즈)",
+    "studio": "Crafty Apes",
+    "date": "2026.11.24",
+    "makeupOn": "2026.11.26",
+    "duration": 120.093605,
+    "tags": [
+      "그린스크린",
+      "세트 확장",
+      "배경 교체",
+      "클린업",
+      "시대 복원",
+      "대기·연기·불"
+    ],
+    "description": "조지아 헌터의 소설을 옮긴 Hulu 리미티드 시리즈 〈위 워 더 럭키 원스〉(2024). 제2차 세계대전이 시작되며 흩어진 유대인 가족 이야기다. Crafty Apes가 공식 채널에 공개한 VFX 릴로, 거의 모든 숏이 결과 → 촬영 판 → 결과 순서로 바뀌며 초록 막·현대 건물·빈 들판이었던 자리를 드러낸다. 검문하는 광장, 객차가 들어선 승강장, 인파로 찬 역 대합실, 아치 문 너머의 게토 거리, 담 너머 밤 골목, 산 아래를 달리는 증기기관차, 열대 해안의 바위산이 실제로는 어떻게 찍혔는지 보여 준다.",
+    "summary": "초록 막 자리에 같은 시대의 석조 건물과 밤거리를 세우고, 숲 뒤 현대 호텔과 아치 너머 고층 건물을 지우고, 빈 들판에 철로와 증기기관차를 놓고, 식당의 여자에게 유리 파편을 날리는 과정을 열여덟 개 기록으로 읽습니다.",
+    "cuts": "data/we-were-the-lucky-ones-crafty-cuts.json",
+    "thumbBase": "assets/thumbs/we-were-the-lucky-ones-crafty",
+    "video": "https://www.youtube.com/watch?v=dDDoNebKJl8",
+    "hero": "WL05",
+    "featured": [
+      "WL03",
+      "WL05",
+      "WL09",
+      "WL12",
+      "WL14",
+      "WL16"
+    ],
+    "analysis": "data/we-were-the-lucky-ones-crafty-analysis.md",
+    "csv": "data/we-were-the-lucky-ones-crafty-clips.csv",
+    "sources": [
+      {
+        "title": "Crafty Apes · 공식 YouTube 릴",
+        "note": "Crafty Apes Enhances Storytelling Through VFX in 'We Were the Lucky Ones' · 2024-09-06 공개 / 분석 타임코드 기준",
+        "url": "https://www.youtube.com/watch?v=dDDoNebKJl8"
+      },
+      {
+        "title": "Crafty Apes · 공식 YouTube 채널",
+        "note": "릴을 공개한 제작사 채널(@CraftyApesVFX)",
+        "url": "https://www.youtube.com/channel/UCm-XMnEsWtO97l8MJeNyn9Q"
+      }
+    ],
+    "provenance": "제작사 Crafty Apes가 공식 YouTube 채널에 공개한 시리즈 VFX 릴을 기준으로 분석했습니다. 소스 1920×1080, 24fps(H.264), 약 2분입니다. 릴 설명은 Hulu 리미티드 시리즈 〈위 워 더 럭키 원스〉에서 Crafty Apes가 Buf, Ingenuity Studios와 함께 VFX를 맡았고, 시대에 맞춘 거리·환경 재구성, 폭발·연기 같은 CG 요소, 그린스크린 세트 확장을 했다고 적지만 숏별 담당·도구·회차는 밝히지 않았습니다. 화면 라벨이 없어 VFX 관찰은 결과 → 촬영 판 → 결과로 바뀌는 순서와 판의 내용(초록 막·현대 건물·빈 들판·색으로 칠한 패스·질감 없는 모델)으로만 판단했습니다. 감독은 릴 설명에 없어 공개된 작품 정보를 따랐습니다. 촬영 플레이트·EXR·카메라 트래킹 원본을 보유한 분석은 아닙니다.",
+    "method": "전체 1초 표본(시트 4장)을 보고 8–116.5초를 0.5초 표본(시트 7장)으로, 숏 경계가 애매한 11.5–13초·47.5–49초를 0.125초로, 같은 숏이 다시 재생되는 74–76.5초를 0.25초로, 판과 패스의 내용 27시점을 원본 해상도 확대 보드 3장으로 대조했습니다. 장면 변화 후보 검출(문턱 0.08)은 24개로 대부분 숏 경계와 맞았고, 어두운 화면 사이의 경계(약 12.2·48.3초)는 검출되지 않아 촘촘한 시트로 확인했습니다. 앞의 Crafty Apes 로고·제목 화면(약 8.29초 이전)과 끝 검은 화면·주소 화면(약 116.29초 이후)은 제외했습니다. 18개 기록 중 공정이 보이지 않는 '결과만 공개'는 1개(WL18)입니다.",
+    "media": "https://vfx-notes-media.meandfree23.workers.dev/"
+  },
+  {
+    "id": "frankenstein-mrx",
+    "number": "037",
     "title": "프랑켄슈타인 · 얼음 속의 배와 번개 탑의 실험실",
     "english": "Frankenstein · The Ship in the Ice and the Lightning Tower Laboratory",
     "year": "2025",
