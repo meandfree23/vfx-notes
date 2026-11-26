@@ -1706,8 +1706,60 @@
     "media": "https://vfx-notes-media.meandfree23.workers.dev/"
   },
   {
-    "id": "frankenstein-mrx",
+    "id": "annette-mill",
     "number": "035",
+    "title": "아네트 · 폭풍의 갑판과 숲으로 열리는 무대",
+    "english": "Annette · The Storm-Swept Deck and the Stage That Opens Onto a Forest",
+    "year": "2021",
+    "format": "영화",
+    "director": "레오스 카락스",
+    "studio": "The Mill",
+    "date": "2026.11.23",
+    "makeupOn": "2026.11.26",
+    "duration": 77.763628,
+    "tags": [
+      "그린스크린",
+      "블루스크린",
+      "세트 확장",
+      "배경 교체",
+      "창밖 교체",
+      "군중"
+    ],
+    "description": "레오스 카락스의 뮤지컬 영화 〈아네트〉(2021). The Mill(옛 MPC 리에주 팀)이 공식 채널에 공개한 브레이크다운 릴로, 파란·초록 막 촬영 판이 결과로 겹쳐 바뀌는 화면과 작은 삽입 화면 속 촬영 판·회색 3D 배치를 보여 준다. 촬영 전에 만든 CG 파도를 무대 뒤에 영사하고 찍은 갑판, 벽이 올라가 숲이 열리는 오페라 무대, 숲에서 들여다보는 객석, 차창과 창밖 야경, 모니터 속 경기장, 조종자를 지운 아네트 인형이 실제로는 어떻게 찍혔는지 드러난다.",
+    "summary": "폭풍 바다의 파도를 미리 만들어 영사하고, 무대 뒷벽 너머에 숲을 끼우고, 파란·초록 막 밖에 터널·고속도로·밤 산등성이·바다 도시를 넣고, 인형을 움직이던 조종자들을 지워 아네트를 혼자 남기는 과정을 열여섯 개 기록으로 읽습니다.",
+    "cuts": "data/annette-mill-cuts.json",
+    "thumbBase": "assets/thumbs/annette-mill",
+    "video": "https://www.youtube.com/watch?v=zK6Okda9bH0",
+    "hero": "AN07",
+    "featured": [
+      "AN03",
+      "AN05",
+      "AN07",
+      "AN08",
+      "AN14",
+      "AN16"
+    ],
+    "analysis": "data/annette-mill-analysis.md",
+    "csv": "data/annette-mill-clips.csv",
+    "sources": [
+      {
+        "title": "The Mill · 공식 YouTube 릴",
+        "note": "The Mill - Annette directed by Leos Carax - VFX Breakdown · 2026-10-07 공개 / 분석 타임코드 기준",
+        "url": "https://www.youtube.com/watch?v=zK6Okda9bH0"
+      },
+      {
+        "title": "The Mill · 공식 YouTube 채널",
+        "note": "릴을 공개한 제작사 채널(@millchannel)",
+        "url": "https://www.youtube.com/channel/UCPJZo6tTnvIBROdmeovhP8A"
+      }
+    ],
+    "provenance": "제작사 The Mill이 공식 YouTube 채널에 공개한 영화 VFX 브레이크다운 릴을 기준으로 분석했습니다. 소스 1920×1080, 24fps(AV1), 약 1분 18초입니다. 릴 설명은 레오스 카락스의 〈아네트〉(2021)의 VFX와 후반 작업을 The Mill(옛 MPC 리에주) 팀이 CG cinéma, SCOPE Production, Wrong Men과 함께 했다고 적고 VFX 수퍼바이저·합성 등 제작진 명단을 싣지만, 숏별 담당·도구·숏 수는 밝히지 않았습니다. 화면 라벨은 파도 영사 숏의 설명 한 줄뿐이라 나머지 숏의 VFX 관찰은 촬영 판이 결과로 겹쳐 바뀌는 순서와 작은 삽입 화면(촬영 판·회색 3D 배치)으로만 판단했습니다. 촬영 플레이트·EXR·카메라 트래킹 원본을 보유한 분석은 아닙니다.",
+    "method": "전체 1초 표본(시트 3장)을 보고 0–77.5초 전체를 0.5초 표본(시트 4장)으로, 연기 층이 바뀌는 24.5–29.5초를 0.25초로, 촬영 판이 결과로 바뀌는 순간과 삽입 화면 63시점을 원본 해상도 확대 보드 6장으로 대조했습니다. 장면 변화 후보 검출(문턱 0.08)은 20개로 대부분 숏 경계와 맞았고, 판에서 결과로 겹쳐 바뀌는 지점(44.9·46.75·49.3·52.8·54.9초)은 검출되지 않아 확대 보드로 확인했습니다. 앞의 The Mill 로고(약 3.0초 이전)와 끝 로고·주소 화면(약 72.8초 이후)은 제외했습니다. 16개 기록 중 공정이 보이지 않는 '결과만 공개'는 2개(AN01·AN04)입니다.",
+    "media": "https://vfx-notes-media.meandfree23.workers.dev/"
+  },
+  {
+    "id": "frankenstein-mrx",
+    "number": "036",
     "title": "프랑켄슈타인 · 얼음 속의 배와 번개 탑의 실험실",
     "english": "Frankenstein · The Ship in the Ice and the Lightning Tower Laboratory",
     "year": "2025",
